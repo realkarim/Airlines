@@ -9,5 +9,9 @@ public class AirlinesActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_airlines);
+
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.container, new AirlinesFragment())
+                .commit();
     }
 }
