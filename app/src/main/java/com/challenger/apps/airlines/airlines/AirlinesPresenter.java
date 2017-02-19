@@ -7,6 +7,8 @@ import com.challenger.apps.airlines.data.DataFetcher;
 
 import java.util.ArrayList;
 
+import javax.inject.Inject;
+
 /**
  * Created by Challenger on 2/19/17.
  */
@@ -14,13 +16,17 @@ import java.util.ArrayList;
 public class AirlinesPresenter implements AirlinesContract.Presenter {
 
     private AirlinesContract.View view;
-    private Context context;
-    private DataFetcher dataFetcher;
 
-    AirlinesPresenter(Context context, AirlinesContract.View view){
-        this.context = context;
+    @Inject
+    DataFetcher dataFetcher;
+
+    @Inject
+    AirlinesPresenter(){
+    }
+
+    @Override
+    public void setView(AirlinesContract.View view){
         this.view = view;
-        dataFetcher = new DataFetcher(context);
     }
 
     @Override

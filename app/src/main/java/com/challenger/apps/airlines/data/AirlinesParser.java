@@ -9,19 +9,27 @@ import org.json.JSONException;
 
 import java.util.ArrayList;
 
+import javax.inject.Inject;
+
 /**
  * Created by Challenger on 2/19/17.
  */
 
 public class AirlinesParser {
 
-    public static AirlineModel parseAirlineObject(String object){
-        Gson gson = new Gson();
+    private Gson gson;
+
+    public AirlinesParser(Gson gson){
+        this.gson = gson;
+    }
+
+    public AirlineModel parseAirlineObject(String object){
+
         AirlineModel airlineModel = gson.fromJson(object, AirlineModel.class);
         return airlineModel;
     }
 
-    public static ArrayList<AirlineModel> parseAirlineArray(String array){
+    public ArrayList<AirlineModel> parseAirlineArray(String array){
         ArrayList<AirlineModel> airlineModelArrayList = null;
         try {
             JSONArray jsonArray = new JSONArray(array);

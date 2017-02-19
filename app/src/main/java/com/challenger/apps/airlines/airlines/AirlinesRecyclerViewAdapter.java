@@ -1,6 +1,6 @@
 package com.challenger.apps.airlines.airlines;
 
-import android.content.Context;
+import android.app.Application;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,11 +8,13 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.challenger.apps.airlines.data.AirlineModel;
 import com.challenger.apps.airlines.R;
+import com.challenger.apps.airlines.data.AirlineModel;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+
+import javax.inject.Inject;
 
 /**
  * Created by Challenger on 2/19/17.
@@ -20,11 +22,13 @@ import java.util.ArrayList;
 public class AirlinesRecyclerViewAdapter extends RecyclerView.Adapter<AirlinesRecyclerViewAdapter.ViewHolder> {
 
     private ArrayList<AirlineModel> airlines;
-    private Context context;
 
-    AirlinesRecyclerViewAdapter(Context context) {
+    @Inject
+    Application context;
+
+    @Inject
+    AirlinesRecyclerViewAdapter() {
         airlines = new ArrayList();
-        this.context = context;
     }
 
     void updateAirlinesList(ArrayList<AirlineModel> airlines) {

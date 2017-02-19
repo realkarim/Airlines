@@ -11,8 +11,11 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.challenger.apps.airlines.R;
+import com.challenger.apps.airlines.dagger.MyApplication;
 
 import java.util.ArrayList;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -27,26 +30,29 @@ public class AirlinesFragment extends Fragment implements AirlinesContract.View 
     @BindView(R.id.airlines_recycler_view)
     RecyclerView airlinesRecyclerView;
 
-    private AirlinesPresenter airlinesPresenter;
+    @Inject
+    AirlinesPresenter airlinesPresenter;
     private AirlinesContract.Presenter airlinesPresenterInterface;
 
     private RecyclerView.LayoutManager mLayoutManager;
-    private AirlinesRecyclerViewAdapter airlinesRecyclerViewAdapter;
+    @Inject
+    AirlinesRecyclerViewAdapter airlinesRecyclerViewAdapter;
 
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_airlines, container, false);
+
+        ((MyApplication) getActivity().getApplication()).getBaseComponent().inject(this);
         ButterKnife.bind(this, view);
 
-        airlinesPresenter = new AirlinesPresenter(getActivity(), this);
+        airlinesPresenter.setView(this);
         airlinesPresenterInterface = airlinesPresenter;
 
         // setup RecyclerView
         mLayoutManager = new LinearLayoutManager(getActivity());
         airlinesRecyclerView.setLayoutManager(mLayoutManager);
-        airlinesRecyclerViewAdapter = new AirlinesRecyclerViewAdapter(getActivity());
         airlinesRecyclerView.setAdapter(airlinesRecyclerViewAdapter);
 
         // load data

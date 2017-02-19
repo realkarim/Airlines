@@ -16,6 +16,8 @@ public interface AirlinesContract {
 
     interface Presenter{
 
+        void setView(View view);
+
         void getAirlines();
     }
 

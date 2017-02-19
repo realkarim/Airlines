@@ -1,5 +1,6 @@
 package com.challenger.apps.airlines.data;
 
+import android.app.Application;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Handler;
@@ -9,6 +10,8 @@ import com.challenger.apps.airlines.R;
 
 import java.io.IOException;
 import java.util.ArrayList;
+
+import javax.inject.Inject;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -21,14 +24,16 @@ import okhttp3.Response;
  */
 
 public class DataFetcher {
-    private Context context;
+    private Application context;
     private OkHttpClient okHttpClient;
     private Handler mainHandler;
+    private AirlinesParser airlinesParser;
 
-    public DataFetcher(Context context){
+    public DataFetcher(Application context, OkHttpClient okHttpClient, Handler mainHandler, AirlinesParser airlinesParser){
         this.context = context;
-        okHttpClient = new OkHttpClient();
-        mainHandler = new Handler(Looper.getMainLooper());
+        this.okHttpClient = okHttpClient;
+        this.mainHandler = mainHandler;
+        this.airlinesParser = airlinesParser;
     }
 
     public void fetchAirlinesData(final DataCallback dataCallback){
@@ -64,7 +69,7 @@ public class DataFetcher {
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
-                final ArrayList<AirlineModel> airlineModelArrayList = AirlinesParser.parseAirlineArray(response.body().string());
+                final ArrayList<AirlineModel> airlineModelArrayList = airlinesParser.parseAirlineArray(response.body().string());
                 if(airlineModelArrayList == null){
                     dataCallback.onError("Error parsing data!");
                     return;

@@ -4,6 +4,9 @@ import android.app.Application;
 import android.os.Handler;
 import android.os.Looper;
 
+import com.challenger.apps.airlines.airlines.AirlinesFragment;
+import com.challenger.apps.airlines.data.AirlinesParser;
+import com.challenger.apps.airlines.data.DataFetcher;
 import com.google.gson.Gson;
 
 import javax.inject.Singleton;
@@ -44,4 +47,15 @@ public class AppModule {
     Handler providesHandler() {
         return new Handler(Looper.getMainLooper());
     }
+    
+    @Provides
+    AirlinesParser providesAirlinesParser(Gson gson) {
+        return new AirlinesParser(gson);
+    }
+
+    @Provides
+    DataFetcher providesDataFetcher(Application context, OkHttpClient okHttpClient, Handler mainHandler, AirlinesParser airlinesParser) {
+        return new DataFetcher(context, okHttpClient, mainHandler, airlinesParser);
+    }
+
 }
