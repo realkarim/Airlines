@@ -1,4 +1,4 @@
-package com.challenger.apps.airlines.Airlines;
+package com.challenger.apps.airlines.airlines;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;

@@ -1,4 +1,4 @@
-package com.challenger.apps.airlines.Data;
+package com.challenger.apps.airlines.data;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

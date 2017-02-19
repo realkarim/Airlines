@@ -1,4 +1,4 @@
-package com.challenger.apps.airlines.Airlines;
+package com.challenger.apps.airlines.airlines;
 
 import android.content.Context;
 

@@ -1,4 +1,4 @@
-package com.challenger.apps.airlines.Airlines;
+package com.challenger.apps.airlines.airlines;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;

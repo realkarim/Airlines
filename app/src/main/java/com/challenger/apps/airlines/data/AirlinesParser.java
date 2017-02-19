@@ -1,4 +1,4 @@
-package com.challenger.apps.airlines.Data;
+package com.challenger.apps.airlines.data;
 
 import android.util.Log;
 

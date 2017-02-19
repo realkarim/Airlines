@@ -1,10 +1,9 @@
-package com.challenger.apps.airlines.Data;
+package com.challenger.apps.airlines.data;
 
 import android.content.Context;
 import android.net.Uri;
 import android.os.Handler;
 import android.os.Looper;
-import android.util.Log;
 
 import com.challenger.apps.airlines.R;
 
