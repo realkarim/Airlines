@@ -1,4 +1,4 @@
-package com.challenger.apps.airlines;
+package com.challenger.apps.airlines.Airlines;
 
 import java.util.ArrayList;
 

@@ -1,7 +1,9 @@
-package com.challenger.apps.airlines;
+package com.challenger.apps.airlines.Airlines;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.challenger.apps.airlines.R;
 
 public class AirlinesActivity extends AppCompatActivity {
 

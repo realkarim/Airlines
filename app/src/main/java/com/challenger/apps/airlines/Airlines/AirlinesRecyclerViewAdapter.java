@@ -1,4 +1,4 @@
-package com.challenger.apps.airlines;
+package com.challenger.apps.airlines.Airlines;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.challenger.apps.airlines.Data.AirlineModel;
+import com.challenger.apps.airlines.R;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -15,17 +17,17 @@ import java.util.ArrayList;
 /**
  * Created by Challenger on 2/19/17.
  */
-public class AirlinesRecyclerViewAdapter extends RecyclerView.Adapter<AirlinesRecyclerViewAdapter.ViewHolder>{
+public class AirlinesRecyclerViewAdapter extends RecyclerView.Adapter<AirlinesRecyclerViewAdapter.ViewHolder> {
 
-    private ArrayList airlines;
+    private ArrayList<AirlineModel> airlines;
     private Context context;
 
-    AirlinesRecyclerViewAdapter(Context context){
+    AirlinesRecyclerViewAdapter(Context context) {
         airlines = new ArrayList();
         this.context = context;
     }
 
-    void updateAirlinesList(ArrayList airlines){
+    void updateAirlinesList(ArrayList<AirlineModel> airlines) {
         this.airlines = airlines;
         notifyDataSetChanged();
     }
@@ -42,9 +44,13 @@ public class AirlinesRecyclerViewAdapter extends RecyclerView.Adapter<AirlinesRe
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.airlineName.setText("Egypt Air");
+
+        String baseUrl = context.getString(R.string.airline_logo_base_url);
+
+        AirlineModel airlineModel = airlines.get(position);
+        holder.airlineName.setText(airlineModel.getName());
         Picasso.with(context)
-                .load("http://www.arabaviation.com/Portals/0/Egypt/govTech_Egyptair-Logo.jpg")
+                .load(baseUrl + airlineModel.getLogoURL())
                 .error(R.drawable.photo_not_available)
                 .placeholder(R.drawable.loading)
                 .into(holder.airlineLogo);
@@ -52,12 +58,13 @@ public class AirlinesRecyclerViewAdapter extends RecyclerView.Adapter<AirlinesRe
 
     @Override
     public int getItemCount() {
-        return 10;
+        return airlines.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public ImageView airlineLogo;
         public TextView airlineName;
+
         public ViewHolder(View v) {
             super(v);
             airlineLogo = (ImageView) v.findViewById(R.id.airline_logo);
