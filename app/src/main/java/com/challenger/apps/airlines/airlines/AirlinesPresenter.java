@@ -2,8 +2,8 @@ package com.challenger.apps.airlines.airlines;
 
 import android.content.Context;
 
-import com.challenger.apps.airlines.Data.DataCallback;
-import com.challenger.apps.airlines.Data.DataFetcher;
+import com.challenger.apps.airlines.data.DataCallback;
+import com.challenger.apps.airlines.data.DataFetcher;
 
 import java.util.ArrayList;
 

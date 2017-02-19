@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.challenger.apps.airlines.Data.AirlineModel;
+import com.challenger.apps.airlines.data.AirlineModel;
 import com.challenger.apps.airlines.R;
 import com.squareup.picasso.Picasso;
 
