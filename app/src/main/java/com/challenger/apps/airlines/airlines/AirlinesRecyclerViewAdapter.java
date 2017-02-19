@@ -1,6 +1,7 @@
 package com.challenger.apps.airlines.airlines;
 
 import android.app.Application;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 
 import com.challenger.apps.airlines.R;
 import com.challenger.apps.airlines.data.AirlineModel;
+import com.challenger.apps.airlines.details.DetailsActivity;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -41,7 +43,19 @@ public class AirlinesRecyclerViewAdapter extends RecyclerView.Adapter<AirlinesRe
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_airlines_recyclerview, parent, false);
 
-        ViewHolder viewHolder = new ViewHolder(view);
+        final ViewHolder viewHolder = new ViewHolder(view);
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Integer position = viewHolder.getAdapterPosition();
+                Intent intent = new Intent(context, DetailsActivity.class);
+                intent.putExtra("airline", airlines.get(position));
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                context.startActivity(intent);
+            }
+        });
+
+
 
         return viewHolder;
     }

@@ -1,5 +1,8 @@
 package com.challenger.apps.airlines.data;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -7,7 +10,7 @@ import com.google.gson.annotations.SerializedName;
  * Created by Challenger on 2/19/17.
  */
 
-public class AirlineModel {
+public class AirlineModel implements Parcelable {
 
     @SerializedName("__clazz")
     @Expose
@@ -98,4 +101,45 @@ public class AirlineModel {
         this.usName = usName;
     }
 
+
+    protected AirlineModel(Parcel in) {
+        clazz = in.readString();
+        code = in.readString();
+        defaultName = in.readString();
+        logoURL = in.readString();
+        name = in.readString();
+        phone = in.readString();
+        site = in.readString();
+        usName = in.readString();
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(clazz);
+        dest.writeString(code);
+        dest.writeString(defaultName);
+        dest.writeString(logoURL);
+        dest.writeString(name);
+        dest.writeString(phone);
+        dest.writeString(site);
+        dest.writeString(usName);
+    }
+
+    @SuppressWarnings("unused")
+    public static final Parcelable.Creator<AirlineModel> CREATOR = new Parcelable.Creator<AirlineModel>() {
+        @Override
+        public AirlineModel createFromParcel(Parcel in) {
+            return new AirlineModel(in);
+        }
+
+        @Override
+        public AirlineModel[] newArray(int size) {
+            return new AirlineModel[size];
+        }
+    };
 }

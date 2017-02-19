@@ -47,7 +47,7 @@ public class AppModule {
     Handler providesHandler() {
         return new Handler(Looper.getMainLooper());
     }
-    
+
     @Provides
     AirlinesParser providesAirlinesParser(Gson gson) {
         return new AirlinesParser(gson);
