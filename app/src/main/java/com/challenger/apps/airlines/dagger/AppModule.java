@@ -59,6 +59,7 @@ public class AppModule {
         return new DataFetcher(context, okHttpClient, mainHandler, airlinesParser);
     }
 
+    @Singleton
     @Provides
     StorageDB providesStorageDB(Application context){
         return new StorageDB(context);

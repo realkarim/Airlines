@@ -14,8 +14,6 @@ import java.util.ArrayList;
 
 public class StorageDB extends SQLiteOpenHelper implements StorageInterface {
 
-    SQLiteDatabase db = this.getWritableDatabase();
-
     @Override
     public boolean save(AirlineModel airlineModel) {
         return addAirline(airlineModel) >= 0;
@@ -81,7 +79,7 @@ public class StorageDB extends SQLiteOpenHelper implements StorageInterface {
         onCreate(db);
     }
 
-    long addAirline(AirlineModel airlineModel) {
+    private long addAirline(AirlineModel airlineModel) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
@@ -101,7 +99,7 @@ public class StorageDB extends SQLiteOpenHelper implements StorageInterface {
         return ret;
     }
 
-    AirlineModel getAirline(String code) {
+    private AirlineModel getAirline(String code) {
         SQLiteDatabase db = this.getReadableDatabase();
 
         Cursor cursor = db.query(TABLE_FAVORITES, new String[]{
@@ -125,7 +123,7 @@ public class StorageDB extends SQLiteOpenHelper implements StorageInterface {
         return airlineModel;
     }
 
-    public ArrayList<AirlineModel> getAllAirlines() {
+    private ArrayList<AirlineModel> getAllAirlines() {
         ArrayList<AirlineModel> airlineList = new ArrayList<AirlineModel>();
         // Select All Query
         String selectQuery = "SELECT  * FROM " + TABLE_FAVORITES;
@@ -153,7 +151,7 @@ public class StorageDB extends SQLiteOpenHelper implements StorageInterface {
         return airlineList;
     }
 
-    public long deleteAirline(String code) {
+    private long deleteAirline(String code) {
         SQLiteDatabase db = this.getReadableDatabase();
 
         long ret = db.delete(TABLE_FAVORITES, KEY_CODE + " = ?", new String[]{code});
