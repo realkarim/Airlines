@@ -1,9 +1,9 @@
 package com.challenger.apps.airlines.airlines;
 
-import android.content.Context;
-
+import com.challenger.apps.airlines.data.AirlineModel;
 import com.challenger.apps.airlines.data.DataCallback;
 import com.challenger.apps.airlines.data.DataFetcher;
+import com.challenger.apps.airlines.data.StorageDB;
 
 import java.util.ArrayList;
 
@@ -21,11 +21,14 @@ public class AirlinesPresenter implements AirlinesContract.Presenter {
     DataFetcher dataFetcher;
 
     @Inject
-    AirlinesPresenter(){
+    StorageDB storageDB;
+
+    @Inject
+    AirlinesPresenter() {
     }
 
     @Override
-    public void setView(AirlinesContract.View view){
+    public void setView(AirlinesContract.View view) {
         this.view = view;
     }
 
@@ -47,5 +50,11 @@ public class AirlinesPresenter implements AirlinesContract.Presenter {
                 view.showMessage("Error: " + error);
             }
         });
+    }
+
+    @Override
+    public void getFavorites() {
+        ArrayList<AirlineModel> airlineModels = storageDB.getFavorites();
+        view.onAirlinesDataReceived(airlineModels);
     }
 }

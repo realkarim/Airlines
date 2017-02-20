@@ -19,6 +19,7 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * Created by Challenger on 2/19/17.
@@ -38,6 +39,7 @@ public class AirlinesFragment extends Fragment implements AirlinesContract.View 
     @Inject
     AirlinesRecyclerViewAdapter airlinesRecyclerViewAdapter;
 
+    private boolean showingFavorites = false;
 
     @Nullable
     @Override
@@ -59,6 +61,28 @@ public class AirlinesFragment extends Fragment implements AirlinesContract.View 
         airlinesPresenterInterface.getAirlines();
 
         return  view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if(showingFavorites)
+            airlinesPresenterInterface.getFavorites();
+    }
+
+    @OnClick({R.id.all, R.id.favorites})
+    public void radio(View view) {
+        switch (view.getId()){
+            case R.id.all:
+                airlinesPresenterInterface.getAirlines();
+                showingFavorites =false;
+                break;
+
+            case R.id.favorites:
+                airlinesPresenterInterface.getFavorites();
+                showingFavorites = true;
+                break;
+        }
     }
 
     @Override

@@ -12,6 +12,10 @@ import com.google.gson.annotations.SerializedName;
 
 public class AirlineModel implements Parcelable {
 
+    public AirlineModel(){
+
+    }
+
     @SerializedName("__clazz")
     @Expose
     private String clazz;

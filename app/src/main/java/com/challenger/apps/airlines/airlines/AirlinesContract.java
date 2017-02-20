@@ -19,6 +19,8 @@ public interface AirlinesContract {
         void setView(View view);
 
         void getAirlines();
+
+        void getFavorites();
     }
 
 }
